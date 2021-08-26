@@ -4,8 +4,10 @@ one:
   railway: MyString
   name: MyString
   walk: 1
+  property: one
 
 two:
   railway: MyString
   name: MyString
   walk: 1
+  property: two

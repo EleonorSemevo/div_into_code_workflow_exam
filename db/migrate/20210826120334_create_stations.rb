@@ -4,6 +4,7 @@ class CreateStations < ActiveRecord::Migration[5.2]
       t.string :railway
       t.string :name
       t.integer :walk
+      t.references :property, foreign_key: true
 
       t.timestamps
     end
