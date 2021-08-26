@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  railway: MyString
+  name: MyString
+  walk: 1
+
+two:
+  railway: MyString
+  name: MyString
+  walk: 1
