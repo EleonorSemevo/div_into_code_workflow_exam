@@ -71,6 +71,25 @@
       <%= form.number_field :walk2 %>
     </div>
   <% end %>
+
+  <% if action_name == 'edit' %>
+    <h1>Name of railway line<%= property.stations.length + 1  %></h1>
+    <div class="field">
+      <%= form.label :name_of_railway_line %>
+      <%= form.text_field :railway3 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :station_name %>
+      <%= form.text_field :name3 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :How_many_minutes_walk %>
+      <%= form.number_field :walk3 %>
+    </div>
+
+  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>

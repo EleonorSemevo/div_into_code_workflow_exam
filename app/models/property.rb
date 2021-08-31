@@ -4,6 +4,6 @@ class Property < ApplicationRecord
   validates :rent, presence: true
   validates :age, presence: true
   validates :remark, presence: true
-  has_many :stations
-  accepts_nested_attributes_for :stations, allow_destroy: true
+  has_many :stations, dependent: :destroy
+  accepts_nested_attributes_for :stations, allow_destroy: true, reject_if: proc { |railway| attributes['railway'].blank? }
 end

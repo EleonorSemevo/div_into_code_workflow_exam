@@ -20,6 +20,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1/edit
   def edit
+    @station = Station.new
   end
 
   # POST /properties or /properties.json
@@ -61,6 +62,31 @@ class PropertiesController < ApplicationController
 
   # PATCH/PUT /properties/1 or /properties/1.json
   def update
+
+    # @station1 = Station.new(name: params[:property][:name1],
+    #                         walk: params[:property][:walk1],
+    #                         railway: params[:property][:railway1])
+    #
+    # @station2 = Station.new(name: params[:property][:name2],
+    #                         walk: params[:property][:walk2],
+    #                         railway: params[:property][:railway2])
+    # @station3 = Station.new(name: params[:property][:name3],
+    #                         walk: params[:property][:walk3],
+    #                         railway: params[:property][:railway3])
+    # pp = {
+    #   properties:{
+    #     name: params[:property][:name],
+    #     rent: params[:property][:rent],
+    #     age: params[:property][:age],
+    #     address: params[:property][:address],
+    #     remark: params[:property][:remark],
+    #     stations_attributes: [
+    #       @station1,
+    #       @station2,
+    #       @station3
+    #     ]
+    #   }
+    # }
     respond_to do |format|
       if @property.update(property_params)
         format.html { redirect_to @property, notice: "Property was successfully updated." }
@@ -74,6 +100,7 @@ class PropertiesController < ApplicationController
 
   # DELETE /properties/1 or /properties/1.json
   def destroy
+
     @property.destroy
     respond_to do |format|
       format.html { redirect_to properties_url, notice: "Property was successfully destroyed." }
