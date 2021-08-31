@@ -8,11 +8,14 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1 or /properties/1.json
   def show
+    @stations = @property.stations
   end
 
   # GET /properties/new
   def new
     @property = Property.new
+    @station1 = Station.new
+    @station2 = Station.new
   end
 
   # GET /properties/1/edit
@@ -21,8 +24,30 @@ class PropertiesController < ApplicationController
 
   # POST /properties or /properties.json
   def create
-    @property = Property.new(property_params)
+    @station1 = Station.new(name: params[:property][:name1],
+                            walk: params[:property][:walk1],
+                            railway: params[:property][:railway1])
 
+    @station2 = Station.new(name: params[:property][:name2],
+                            walk: params[:property][:walk2],
+                            railway: params[:property][:railway2])
+
+    pp = {
+      properties:{
+        name: params[:property][:name],
+        rent: params[:property][:rent],
+        age: params[:property][:age],
+        address: params[:property][:address],
+        remark: params[:property][:remark],
+        stations_attributes: [
+        @station1,
+        @station2
+        ]
+      }
+    }
+
+
+    @property = Property.new(pp[:properties])
     respond_to do |format|
       if @property.save
         format.html { redirect_to @property, notice: "Property was successfully created." }
@@ -64,6 +89,8 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :rent, :age, :address, :remark)
+      params.require(:property).permit(:name, :rent, :age, :address, :remark,
+                                       :name1,:name2, :railway1,
+                                       :railway2,:walk1,:walk2)
     end
 end

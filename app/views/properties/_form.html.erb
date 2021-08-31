@@ -12,30 +12,65 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :property %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
     <%= form.label :rent %>
-    <%= form.number_field :rent %>
+    <%= form.number_field :rent %>RWF
   </div>
 
   <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
+    <%= form.label :building_age %>
+    <%= form.number_field :age %>year/years old
   </div>
 
   <div class="field">
     <%= form.label :address %>
-    <%= form.text_field :address %>
+    <%= form.text_area :address %>
   </div>
 
   <div class="field">
     <%= form.label :remark %>
-    <%= form.text_field :remark %>
+    <%= form.text_area :remark %>
   </div>
 
+  <hr />
+  <h1>Name of railway line1</h1>
+  <%if @station1.present? && @station2.present? %>
+    <div class="field">
+      <%= form.label :name_of_railway_line %>
+      <%= form.text_field :railway1 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :station_name %>
+      <%= form.text_field :name1 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :How_many_minutes_walk %>
+      <%= form.number_field :walk1 %>
+    </div>
+
+    <h1>Name of railway line2</h1>
+
+    <div class="field">
+      <%= form.label :name_of_railway_line %>
+      <%= form.text_field :railway2 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :station_name %>
+      <%= form.text_field :name2 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :How_many_minutes_walk %>
+      <%= form.number_field :walk2 %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>
