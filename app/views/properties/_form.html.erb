@@ -1,10 +1,10 @@
-<%= form_with(model: property, local: true) do |form| %>
-  <% if property.errors.any? %>
+<%= form_with(model: @property, local: true) do |form| %>
+  <% if @property.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
 
       <ul>
-      <% property.errors.full_messages.each do |message| %>
+      <% @property.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -37,60 +37,29 @@
   </div>
 
   <hr />
-  <h1>Name of railway line1</h1>
-  <%if @station1.present? && @station2.present? %>
-    <div class="field">
-      <%= form.label :name_of_railway_line %>
-      <%= form.text_field :railway1 %>
+
+
+    <%= form.fields_for :stations do |station| %>
+    <h1>Name of railway line <%= station.index + 1 %></h1>
+      <div class="field">
+        <%= station.label :name_of_railway_line %>
+        <%= station.text_field :railway %>
+      </div>
+
+      <div class="field">
+        <%= station.label :station_name %>
+        <%= station.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= station.label :How_many_minutes_walk %>
+        <%= station.number_field :walk %>
+      </div>
+
+
+
+    <% end %>
+    <div class="actions">
+      <%= form.submit %>
     </div>
-
-    <div class="field">
-      <%= form.label :station_name %>
-      <%= form.text_field :name1 %>
-    </div>
-
-    <div class="field">
-      <%= form.label :How_many_minutes_walk %>
-      <%= form.number_field :walk1 %>
-    </div>
-
-    <h1>Name of railway line2</h1>
-
-    <div class="field">
-      <%= form.label :name_of_railway_line %>
-      <%= form.text_field :railway2 %>
-    </div>
-
-    <div class="field">
-      <%= form.label :station_name %>
-      <%= form.text_field :name2 %>
-    </div>
-
-    <div class="field">
-      <%= form.label :How_many_minutes_walk %>
-      <%= form.number_field :walk2 %>
-    </div>
-  <% end %>
-
-  <% if action_name == 'edit' %>
-    <h1>Name of railway line<%= property.stations.length + 1  %></h1>
-    <div class="field">
-      <%= form.label :name_of_railway_line %>
-      <%= form.text_field :railway3 %>
-    </div>
-
-    <div class="field">
-      <%= form.label :station_name %>
-      <%= form.text_field :name3 %>
-    </div>
-
-    <div class="field">
-      <%= form.label :How_many_minutes_walk %>
-      <%= form.number_field :walk3 %>
-    </div>
-
-  <% end %>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

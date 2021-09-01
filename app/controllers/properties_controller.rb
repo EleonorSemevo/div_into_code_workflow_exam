@@ -14,48 +14,48 @@ class PropertiesController < ApplicationController
   # GET /properties/new
   def new
     @property = Property.new
-    @station1 = Station.new
-    @station2 = Station.new
+    2.times do
+      @property.stations.new
+    end
   end
 
   # GET /properties/1/edit
   def edit
-    @station = Station.new
+    @property.stations.new
   end
 
   # POST /properties or /properties.json
   def create
-    @station1 = Station.new(name: params[:property][:name1],
-                            walk: params[:property][:walk1],
-                            railway: params[:property][:railway1])
+    # station1_param = {railway: params[:property][:railway1], name: params[:property][:name1], walk: [:property][:walk1].to_i}
+    #
+    # station2_param = {name: params[:property][:name2],
+    #                         walk: params[:property][:walk2],
+    #                         railway: params[:property][:railway2].to_i }
+    #
+    # pp = {
+    #   properties:{
+    #     name: params[:property][:name],
+    #     rent: params[:property][:rent],
+    #     age: params[:property][:age],
+    #     address: params[:property][:address],
+    #     remark: params[:property][:remark],
+    #     stations_attributes: {
+    #       first: station1_param,
+    #       second: station2_param,
+    #     }
+    #   }
+    # }
 
-    @station2 = Station.new(name: params[:property][:name2],
-                            walk: params[:property][:walk2],
-                            railway: params[:property][:railway2])
+    # prop = Property.new(name: 'hhoo', rent: 4,age: 4,address: 'rr', remark: 'rff', stations_attributes:{first: {railway: 'ggg',name: 'rr', walk: 5}})
 
-    pp = {
-      properties:{
-        name: params[:property][:name],
-        rent: params[:property][:rent],
-        age: params[:property][:age],
-        address: params[:property][:address],
-        remark: params[:property][:remark],
-        stations_attributes: [
-        @station1,
-        @station2
-        ]
-      }
-    }
-
-
-    @property = Property.new(pp[:properties])
-    respond_to do |format|
+    @property = Property.new(property_params)
+     respond_to do |format|
       if @property.save
         format.html { redirect_to @property, notice: "Property was successfully created." }
-        format.json { render :show, status: :created, location: @property }
+        # format.json { render :show, status: :created, location: @property }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
+        # format.json { render json: @property.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -117,7 +117,6 @@ class PropertiesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def property_params
       params.require(:property).permit(:name, :rent, :age, :address, :remark,
-                                       :name1,:name2, :railway1,
-                                       :railway2,:walk1,:walk2)
+                                       stations_attributes: {})
     end
 end
