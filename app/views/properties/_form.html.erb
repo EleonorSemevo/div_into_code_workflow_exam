@@ -1,10 +1,10 @@
-<%= form_with(model: property, local: true) do |form| %>
-  <% if property.errors.any? %>
+<%= form_with(model: @property, local: true) do |form| %>
+  <% if @property.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
 
       <ul>
-      <% property.errors.full_messages.each do |message| %>
+      <% @property.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,31 +12,54 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :property %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
     <%= form.label :rent %>
-    <%= form.number_field :rent %>
+    <%= form.number_field :rent %>RWF
   </div>
 
   <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
+    <%= form.label :building_age %>
+    <%= form.number_field :age %>year/years old
   </div>
 
   <div class="field">
     <%= form.label :address %>
-    <%= form.text_field :address %>
+    <%= form.text_area :address %>
   </div>
 
   <div class="field">
     <%= form.label :remark %>
-    <%= form.text_field :remark %>
+    <%= form.text_area :remark %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <hr />
+
+
+    <%= form.fields_for :stations do |station| %>
+    <h1>Name of railway line <%= station.index + 1 %></h1>
+      <div class="field">
+        <%= station.label :name_of_railway_line %>
+        <%= station.text_field :railway %>
+      </div>
+
+      <div class="field">
+        <%= station.label :station_name %>
+        <%= station.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= station.label :How_many_minutes_walk %>
+        <%= station.number_field :walk %>
+      </div>
+
+
+
+    <% end %>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
 <% end %>
